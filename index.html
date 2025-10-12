@@ -55,11 +55,12 @@
     @keyframes fadeIn {
       to {opacity: 1;}
     }
-    
+
     nav {
       display: flex;
       justify-content: center;
-      gap: 30px;
+      flex-wrap: wrap;
+      gap: 25px;
       background: rgba(255,255,255,0.95);
       padding: 18px 10px;
       position: sticky;
@@ -137,22 +138,9 @@
       font-size: 1.08rem;
     }
 
-    .video-container {
-      position: relative;
-      overflow: hidden;
-      padding-top: 56.25%;
-      border-radius: 20px;
-      margin-top: 20px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-    }
-
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
+    ul {
+      margin-left: 25px;
+      margin-bottom: 15px;
     }
 
     .btn-youtube {
@@ -224,6 +212,8 @@
     <a href="#post3">Post 3</a>
     <a href="#post4">Post 4</a>
     <a href="#post5">Post 5</a>
+    <a href="#post6">Post 6</a>
+    <a href="#post7">Post 7</a>
   </nav>
 
   <main>
@@ -265,14 +255,63 @@
         <a href="https://youtu.be/Gb6Gg4eOFLQ?si=nHHO3u7bT_llF3p0" 
            target="_blank" 
            class="btn-youtube">
-       🎥 Tonton Video Tutorial Menginstal DBMS(MySQL) di YouTube
+       🎥 Tonton Video Tutorial Menginstal DBMS (MySQL) di YouTube
         </a>
       </div>
+    </article>
+
+    <article id="post6">
+      <h2>Post 6: Apa Itu Primary Key, Foreign Key, dan Candidate Key</h2>
+      <p><b>1. Primary Key</b> adalah atribut unik yang digunakan untuk mengidentifikasi setiap baris dalam tabel. Tidak boleh bernilai <i>null</i> dan tidak boleh duplikat.</p>
+      <p><b>Contoh penerapan ERD:</b></p>
+      <ul>
+        <li>NIM pada tabel <b>Mahasiswa</b></li>
+        <li>Kode_MK pada tabel <b>Mata Kuliah</b></li>
+        <li>ID_Dosen pada tabel <b>Dosen</b></li>
+        <li>ID_Pesanan pada tabel <b>Transaksi</b></li>
+        <li>ID_Buku pada tabel <b>Perpustakaan</b></li>
+      </ul>
+
+      <p><b>2. Foreign Key</b> adalah atribut yang menjadi penghubung antara dua tabel, yaitu tabel anak (child) dan tabel induk (parent). Nilainya berasal dari Primary Key tabel lain.</p>
+      <p><b>Contoh penerapan ERD:</b></p>
+      <ul>
+        <li>NIM di tabel <b>KRS</b> yang merujuk ke NIM di tabel <b>Mahasiswa</b></li>
+        <li>Kode_MK di tabel <b>KRS</b> yang merujuk ke Kode_MK di tabel <b>Mata Kuliah</b></li>
+        <li>ID_Dosen di tabel <b>Jadwal</b> yang merujuk ke ID_Dosen di tabel <b>Dosen</b></li>
+        <li>ID_Pelanggan di tabel <b>Transaksi</b> yang merujuk ke ID_Pelanggan di tabel <b>Pelanggan</b></li>
+        <li>ID_Buku di tabel <b>Peminjaman</b> yang merujuk ke ID_Buku di tabel <b>Buku</b></li>
+      </ul>
+
+      <p><b>3. Candidate Key</b> adalah sekumpulan atribut yang berpotensi menjadi Primary Key karena memiliki nilai unik. Dari beberapa Candidate Key, hanya satu yang akan dipilih menjadi Primary Key.</p>
+      <p><b>Contoh penerapan ERD:</b></p>
+      <ul>
+        <li>(NIM, Email) pada tabel <b>Mahasiswa</b></li>
+        <li>(Kode_MK, Nama_MK) pada tabel <b>Mata Kuliah</b></li>
+        <li>(ID_Dosen, NIP) pada tabel <b>Dosen</b></li>
+        <li>(ID_Pegawai, No_KTP) pada tabel <b>Pegawai</b></li>
+        <li>(ID_Pelanggan, No_HP) pada tabel <b>Pelanggan</b></li>
+      </ul>
+    </article>
+
+    <article id="post7">
+      <h2>Post 7: Apa Itu Relation pada ERD dan Mengapa Many-to-Many Tidak Baik Digunakan</h2>
+      <p><b>Relation</b> pada ERD menggambarkan hubungan antara dua entitas. Relasi ini menjelaskan bagaimana data di satu tabel berhubungan dengan data di tabel lain. Ada tiga jenis relasi utama:</p>
+      <ul>
+        <li><b>One-to-One (1:1):</b> Satu entitas hanya berhubungan dengan satu entitas lain.</li>
+        <li><b>One-to-Many (1:N):</b> Satu entitas bisa berhubungan dengan banyak entitas lain.</li>
+        <li><b>Many-to-Many (M:N):</b> Banyak entitas di satu sisi berhubungan dengan banyak entitas di sisi lain.</li>
+      </ul>
+
+      <p><b>Mengapa Many-to-Many tidak baik digunakan?</b></p>
+      <p>Karena relasi M:N sulit diimplementasikan langsung di tabel fisik database. Database relasional tidak mendukung relasi langsung antar dua tabel yang keduanya memiliki banyak hubungan. Untuk mengatasinya, relasi ini harus dipecah menjadi dua relasi 1:N melalui tabel penghubung (<i>bridge table</i>).</p>
+
+      <p><b>Contoh:</b></p>
+      <p>Relasi antara <b>Mahasiswa</b> dan <b>Mata Kuliah</b> awalnya M:N (karena satu mahasiswa bisa mengambil banyak mata kuliah dan satu mata kuliah bisa diambil banyak mahasiswa). Maka dibuat tabel baru bernama <b>KRS</b> yang berisi NIM dan Kode_MK sebagai penghubung.</p>
     </article>
   </main>
 
   <footer>
-    <p>© 2025 - Catatan Kuliah Basis Data | 
+    <p>© 2025 - Catatan Kuliah Basis Data |
       <a href="https://www.ubpkarawang.ac.id" class="btn-footer" target="_blank">Kunjungi UBP Karawang</a>
     </p>
   </footer>
